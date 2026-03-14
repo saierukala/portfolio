@@ -16,7 +16,6 @@ export default function Home() {
           <Experience />
           <Projects />
           <Contact />
-          test
         </div>
       </div>
       <footer className="w-full py-8 text-center text-sm text-zinc-500">

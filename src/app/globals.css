@@ -32,11 +32,6 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Custom cursor: hide default when custom cursor is used */
-body.cursor-none * {
-  cursor: none !important;
-}
-
 /* Animated background orbs - slow drift */
 @keyframes bg-orb-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }

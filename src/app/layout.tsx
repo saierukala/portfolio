@@ -3,7 +3,6 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import GlobalBackground from '@/components/GlobalBackground';
 import Navbar from '@/components/Navbar';
-import CustomCursor from '@/components/CustomCursor';
 import ToasterProvider from '@/components/ToasterProvider';
 
 const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta' });
@@ -20,8 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${plusJakarta.className} bg-[#09090b] text-zinc-100 antialiased cursor-none`}>
-        <CustomCursor />
+      <body className={`${plusJakarta.className} bg-[#09090b] text-zinc-100 antialiased`}>
         <ToasterProvider />
         <GlobalBackground>
           <Navbar />

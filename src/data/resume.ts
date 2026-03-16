@@ -11,7 +11,7 @@ export const resumeData = {
     bio: "Frontend Developer with 2+ years of experience building scalable and high-performance web applications. Proficient in React.js, Vue.js, Nuxt.js, Next.js, and Node.js. Experienced across tax management, e-commerce, and enterprise platforms. Skilled in Tailwind CSS, clean architecture principles. Passionate about emerging technologies and collaborative development.",
     stats: [
       { label: "Experience", value: "2+ Years" },
-      { label: "Projects Built", value: "10+" },
+      { label: "Projects Built", value: "5+" },
       { label: "Domains Mastered", value: "3" },
     ],
   },

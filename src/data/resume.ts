@@ -98,28 +98,36 @@ export const resumeData = {
   ],
   moreProjects: [
     {
-      title: "Travel Booking Dashboard",
+      title: "HomeCraft Projects",
       description:
-        "Dummy project for now: a booking operations dashboard with itinerary management, payment summaries, and admin approvals.",
-      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
+        "HomeCraft Projects End-to-end interior design platform I developed for concept-to-execution solutions using in-house teams and modular factories. Features minimalistic, personalized home designs with project showcases and testimonials. Highlights my skills in conversion-driven websites for service businesses.",
+      techStack: ["Nuxt.js", "TypeScript", "Tailwind CSS", "Shadcn/ui"],
       github: "#",
-      live: "#",
+      live: "https://homecraftprojects.in/",
     },
     {
-      title: "Realtime Team Workspace",
+      title: "Samira Energies",
       description:
-        "Dummy project for now: a collaboration workspace with comments, task tracking, activity feeds, and lightweight notifications.",
-      techStack: ["React.js", "Socket.io", "Express.js", "PostgreSQL"],
+        "Samira Energies is a responsive Nuxt.js site I built for a Hyderabad solar energy firm serving homes, farms, and businesses. Leveraging SSR and Vue.js, it offers dynamic showcases, lead forms, and SEO content for better visibility. This portfolio entry highlights my Nuxt.js skills for scalable apps in India's clean energy market.",
+      techStack: ["Nuxt.js", "TypeScript", "Tailwind CSS", "Shadcn/ui"],
       github: "#",
-      live: "#",
+      live: "https://samiraenergies.uxcrafts.dev/",
     },
     {
-      title: "Analytics Commerce Panel",
+      title: "Avkinfra Group",
       description:
-        "Dummy project for now: an e-commerce insights panel focused on product performance, conversion metrics, and campaign trends.",
-      techStack: ["Vue.js", "Charts", "Tailwind CSS", "REST API"],
+        "Avkinfra Group is a premium website I built with Vue.js frontend and Laravel backend for an infrastructure firm specializing in real estate, construction, and urban projects. It features dynamic galleries, lead gen, and CMS for scalable performance in India's infra sector. This showcases my Vue.js-Laravel full-stack skills, extending my Nuxt.js/React expertise for service businesses",
+      techStack: [
+        "Vue.js",
+        "Laravel",
+        "TypeScript",
+        "Tailwind CSS",
+        "Shadcn/ui",
+        "REST API",
+        "PostgreSQL",
+      ],
       github: "#",
-      live: "#",
+      live: "https://www.avkinfragroup.com/",
     },
   ],
   skills: {

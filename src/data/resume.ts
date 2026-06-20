@@ -8,9 +8,9 @@ export const resumeData = {
     resumePdf: "/sai_resume.pdf",
     linkedin: "https://linkedin.com/in/saierukala",
     github: "https://github.com",
-    bio: "Frontend Developer with 2+ years of experience building scalable and high-performance web applications. Proficient in React.js, Vue.js, Nuxt.js, Next.js, and Node.js. Experienced across tax management, e-commerce, and enterprise platforms. Skilled in Tailwind CSS, clean architecture principles. Passionate about emerging technologies and collaborative development.",
+    bio: "Frontend Developer with 2.6+ years of experience building scalable and high-performance web applications. Proficient in React.js, Vue.js, Nuxt.js, Next.js, and Node.js. Experienced across tax management, e-commerce, and enterprise platforms. Skilled in Tailwind CSS and clean architecture principles. Passionate about emerging technologies and collaborative development.",
     stats: [
-      { label: "Experience", value: "2+ Years" },
+      { label: "Experience", value: "2.6+ Years" },
       { label: "Projects Built", value: "5+" },
       { label: "Domains Mastered", value: "3" },
     ],
@@ -19,18 +19,18 @@ export const resumeData = {
     {
       company: "UX Crafts",
       role: "Web Developer (Full-time)",
-      duration: "Nov 2024 – Present",
+      duration: "Nov 2024 - Present",
       location: "Hyderabad",
       achievements: [
-        "Developed high-performance, SEO-optimized web apps using Vue.js, Nuxt.js, Tailwind CSS across tax, tourism, and solar energy domains",
-        "Designed and built the DhruvTax Document & Client Management System with multi-stage workflows and automation",
-        "Implemented secure role-based dashboards, real-time collaboration, audit tracking, and full CRUD operations with PostgreSQL",
+        "Building an HRMS for 300+ employees with reusable React and Next.js interfaces for employee records, attendance, leave, and payroll workflows",
+        "Developed TG Agros ERP modules for sales, purchasing, and inventory, improving initial load time by around 30% with SSR and code splitting",
+        "Built and integrated Node.js and Express.js REST APIs backed by PostgreSQL and MySQL for scalable enterprise workflows",
       ],
     },
     {
       company: "Kwikkoder-IT Solutions",
       role: "React.js Developer (Full-time)",
-      duration: "Oct 2023 – Nov 2024",
+      duration: "Oct 2023 - Nov 2024",
       location: "Hyderabad",
       achievements: [
         "Developed a school management system using React.js, Redux, Material UI, and Ant Design for attendance, admissions, and fee tracking",
@@ -40,6 +40,42 @@ export const resumeData = {
     },
   ],
   projects: [
+    {
+      title: "HRMS - Human Resource Management System",
+      duration: "Feb 2026 - Present",
+      company: "UX Crafts",
+      eyebrow: "Current flagship project",
+      metric: "300+ employees",
+      description:
+        "Production HR platform covering employee records, attendance, leave approvals, and payroll. Built reusable, responsive interfaces and integrated secure REST APIs across the complete workflow.",
+      highlights: [
+        "Employee records, attendance, leave and payroll modules",
+        "Search, filtering and client-side validation for faster, cleaner data entry",
+        "Node.js and Express APIs backed by PostgreSQL",
+      ],
+      techStack: ["React.js", "Next.js", "Node.js", "Express.js", "PostgreSQL", "Tailwind CSS"],
+      github: "#",
+      live: "#",
+      featured: true,
+    },
+    {
+      title: "TG Agros ERP",
+      duration: "Aug 2025 - Jan 2026",
+      company: "UX Crafts",
+      eyebrow: "Enterprise resource planning",
+      metric: "~30% faster load",
+      description:
+        "Scalable ERP for sales, purchasing, and inventory operations. Delivered reusable Material UI components, predictable Redux state, optimized data-heavy screens, and full-stack API integrations.",
+      highlights: [
+        "Core sales, purchasing and inventory modules",
+        "Pagination and lazy loading for large operational data tables",
+        "SSR and route-based code splitting reduced initial load time by around 30%",
+      ],
+      techStack: ["React.js", "Next.js", "Redux Toolkit", "Material UI", "Node.js", "Express.js", "MySQL"],
+      github: "#",
+      live: "#",
+      featured: true,
+    },
     {
       title: "DhruvTax Application",
       duration: "Nov 2024 – Jun 2025",

@@ -5,7 +5,7 @@ export const resumeData = {
     location: "Hyderabad, Telangana",
     phone: "7989672916",
     email: "sai.erukala1508@gmail.com",
-    resumePdf: "/sai_resume.pdf",
+    resumePdf: "/SaiE_FrontendDeveloper.pdf",
     linkedin: "https://linkedin.com/in/saierukala",
     github: "https://github.com",
     bio: "Frontend Developer with 2.6+ years of experience building scalable and high-performance web applications. Proficient in React.js, Vue.js, Nuxt.js, Next.js, and Node.js. Experienced across tax management, e-commerce, and enterprise platforms. Skilled in Tailwind CSS and clean architecture principles. Passionate about emerging technologies and collaborative development.",
@@ -18,7 +18,7 @@ export const resumeData = {
   experience: [
     {
       company: "UX Crafts",
-      role: "Web Developer (Full-time)",
+      role: "React Developer  (Full-time)",
       duration: "Nov 2024 - Present",
       location: "Hyderabad",
       achievements: [
@@ -29,7 +29,7 @@ export const resumeData = {
     },
     {
       company: "Kwikkoder-IT Solutions",
-      role: "React.js Developer (Full-time)",
+      role: "React Developer (Full-time)",
       duration: "Oct 2023 - Nov 2024",
       location: "Hyderabad",
       achievements: [

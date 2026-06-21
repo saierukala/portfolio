@@ -8,9 +8,9 @@ export const resumeData = {
     resumePdf: "/SaiE_FrontendDeveloper.pdf",
     linkedin: "https://linkedin.com/in/saierukala",
     github: "https://github.com",
-    bio: "Frontend Developer with 2.6+ years of experience building scalable and high-performance web applications. Proficient in React.js, Vue.js, Nuxt.js, Next.js, and Node.js. Experienced across tax management, e-commerce, and enterprise platforms. Skilled in Tailwind CSS and clean architecture principles. Passionate about emerging technologies and collaborative development.",
+    bio: "Frontend Developer with 2.5+ years of experience building scalable and high-performance web applications. Proficient in React.js, Vue.js, Nuxt.js, Next.js, and Node.js. Experienced across tax management, e-commerce, and enterprise platforms. Skilled in Tailwind CSS and clean architecture principles. Passionate about emerging technologies and collaborative development.",
     stats: [
-      { label: "Experience", value: "2.6+ Years" },
+      { label: "Experience", value: "2.5+ Years" },
       { label: "Projects Built", value: "5+" },
       { label: "Domains Mastered", value: "3" },
     ],

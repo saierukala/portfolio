@@ -1,32 +1,31 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
+
+const token = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
 
 const config: Config = {
-  darkMode: "class",
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  darkMode: ["class", ".dark"],
+  content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: "#00D4FF", // Electric Cyan
-        secondary: "#7C3AED", // Violet
-        dark: "#05050A", // Deep space
+        bg: token("bg"),
+        surface: token("surface"),
+        line: token("line"),
+        fg: token("fg"),
+        muted: token("muted"),
+        accent: token("accent"),
+        accent2: token("accent2"),
+        "accent-ink": token("accent-ink"),
       },
       fontFamily: {
-        syne: ["var(--font-syne)"],
-        sans: ["var(--font-dm-sans)"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
-      transitionProperty: {
-        height: 'height',
-        spacing: 'margin, padding',
-        'border-color': 'border-color',
-      }
+      borderRadius: { card: "16px" },
+      maxWidth: { page: "1200px" },
     },
   },
-  plugins: [],
+  plugins: [plugin(({ addVariant }) => addVariant("light", ".light &"))],
 };
 export default config;

@@ -22,7 +22,14 @@ export type CaseStudy = {
   stack: string[];
   /** Swap in a real screenshot later: put the file in /public and set e.g. "/work/hrms.png". */
   image?: string;
-  mock: "hrms" | "erp" | "store" | "news";
+  mock?: "hrms" | "erp" | "store" | "news";
+  /** Real screenshots shown on the case-study page (files in /public). */
+  gallery?: { src: string; alt: string; caption: string; phone?: boolean }[];
+  /** Short demo clips played inline on the case-study page. */
+  videos?: { src: string; poster: string; title: string; caption: string }[];
+  /** Full demo video (external). */
+  demoUrl?: string;
+  repoUrl?: string;
 };
 
 export const profile = {
@@ -62,7 +69,51 @@ export const metrics: Metric[] = [
   { value: "90+", label: "Lighthouse score", source: "Storefront @ Kwikkoder", spark: [6, 7, 8, 8, 9, 10, 10, 11] },
 ];
 
+const bh = "/work/businesshub";
+
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: "businesshub",
+    title: "BusinessHub — Appliance Repair Booking & Field Service",
+    short: "BusinessHub",
+    company: "Personal project",
+    year: "2026",
+    size: "large",
+    problem:
+      "HomeFix Appliance Services needed customers to book repairs online, staff to run the day and take phone bookings, and technicians to work jobs from a phone, without ever double-booking a technician.",
+    built: [
+      "Next.js 16 web app for three roles: a 5-step customer booking wizard, a staff console (dashboard, assignment, reports, audit log) and a mobile-first technician view",
+      "Node/Express/TypeScript API on PostgreSQL + Prisma; an exclusion constraint (btree_gist) makes double booking impossible, even for two requests at the same moment",
+      "Razorpay payments (test mode) with server-set amounts, signature checks and a signed webhook; pg-boss background jobs for email and in-app notifications",
+    ],
+    extra: [
+      "Availability engine built from technician skills, service areas, working hours, time off and existing jobs; business time in Asia/Kolkata, stored in UTC",
+      "One booking service for customers and staff; staff overrides need a reason, which goes into the audit log",
+      "Booking status rules with status history and an Owner-only audit log",
+      "bcrypt + JWT in httpOnly cookies, role and ownership checks on every endpoint, Zod validation on every request",
+      "Vitest + Supertest API tests, Testing Library UI tests and Playwright end-to-end tests of both booking paths, run in GitHub Actions CI",
+      "React Native (Expo) mobile app for technicians",
+    ],
+    result: { metric: "0", label: "double bookings, enforced by the database" },
+    stack: ["Next.js", "React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma", "Zod", "pg-boss", "Razorpay", "Playwright", "React Native"],
+    image: `${bh}/staff-dashboard.png`,
+    demoUrl: "https://drive.google.com/file/d/1l30L5yxm4BNmt8Jmm4eeJWW5m8gabDfW/view?usp=drivesdk",
+    repoUrl: "https://github.com/saierukala/businesshub-frontend",
+    gallery: [
+      { src: `${bh}/staff-dashboard.png`, alt: "Staff dashboard with today's bookings by status, pending assignments, revenue and technician workload", caption: "Staff dashboard" },
+      { src: `${bh}/customer-home.png`, alt: "Customer home with upcoming visit, appliances, payments and reviews", caption: "Customer home" },
+      { src: `${bh}/booking-wizard.png`, alt: "Booking wizard step for picking a date and a free time slot", caption: "Booking wizard" },
+      { src: `${bh}/staff-reports.png`, alt: "Reports for bookings, revenue, services and technicians", caption: "Reports" },
+      { src: `${bh}/audit-log.png`, alt: "Owner-only audit log with filters", caption: "Audit log" },
+      { src: `${bh}/technician-phone.png`, alt: "Technician's job screen on a phone with large on my way, arrived and start buttons", caption: "Technician on a phone", phone: true },
+    ],
+    videos: [
+      { src: `${bh}/01-customer-books-a-repair.webm`, poster: `${bh}/01-customer-books-a-repair-poster.png`, title: "Customer books a repair", caption: "The 5-step booking wizard, from appliance to a free time slot." },
+      { src: `${bh}/03-technician-on-the-job.webm`, poster: `${bh}/03-technician-on-the-job-poster.png`, title: "Technician on the job", caption: "On my way, arrived, start: one-hand buttons on a phone." },
+      { src: `${bh}/11-double-booking-refused.webm`, poster: `${bh}/11-double-booking-refused-poster.png`, title: "Double booking refused", caption: "Two bookings for the same technician and time: the second gets a 409." },
+      { src: `${bh}/08-owner-dashboard-reports-audit.webm`, poster: `${bh}/08-owner-dashboard-reports-audit-poster.png`, title: "Owner: dashboard, reports, audit", caption: "The owner reviews the day, revenue and every change in the audit log." },
+    ],
+  },
   {
     slug: "hrms",
     title: "HRMS — Human Resource Management System",

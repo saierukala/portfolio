@@ -19,14 +19,16 @@ const dashboards = { hrms: HrmsDash, erp: ErpDash, store: StoreDash, news: NewsD
  * real screenshot set via `image` on the case study; falls back to the live drawn dashboard.
  */
 export default function Mock({ study, priority = false }: { study: CaseStudy; priority?: boolean }) {
-  const Dash = dashboards[study.mock];
+  const kind = study.mock ?? "hrms";
+  const Dash = dashboards[kind];
+  const alt = study.gallery?.[0]?.alt ?? ALT[kind];
   return (
     <div className="aspect-[16/10] w-full">
       {study.image ? (
         <div className="relative h-full w-full overflow-hidden rounded-xl border border-line bg-white">
           <Image
             src={study.image}
-            alt={ALT[study.mock]}
+            alt={alt}
             fill
             sizes="(min-width: 1024px) 600px, 100vw"
             priority={priority}
@@ -34,7 +36,7 @@ export default function Mock({ study, priority = false }: { study: CaseStudy; pr
           />
         </div>
       ) : (
-        <div role="img" aria-label={ALT[study.mock]} className="h-full w-full">
+        <div role="img" aria-label={alt} className="h-full w-full">
           <Dash />
         </div>
       )}

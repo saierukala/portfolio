@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight, Play } from "lucide-react";
 import { caseStudies } from "@/data/profile";
 import Section from "./Section";
 import Reveal from "./Reveal";
@@ -9,11 +10,68 @@ import Chips from "./Chips";
 // Row 1: large + medium, row 2: medium + large, so the 12-col grid has no gaps.
 const order = ["hrms", "sri-lakshmi-kalamkari", "swechaa-news-portal", "tg-agros-erp"];
 const bento = order.map((slug) => caseStudies.find((c) => c.slug === slug)!);
+const featured = caseStudies.find((c) => c.slug === "businesshub")!;
 
 export default function Work() {
   return (
-    <Section id="work" eyebrow="Selected work" title="Four products, each used by real teams.">
+    <Section id="work" eyebrow="Selected work" title="Five products, built end to end.">
       <div className="grid gap-4 lg:grid-cols-12">
+        <Reveal className="lg:col-span-12">
+          <Lift className="h-full">
+            <article className="group relative grid gap-6 rounded-card border border-line bg-surface p-5 transition-colors focus-within:border-accent hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10 sm:p-6 lg:grid-cols-12">
+              <div className="flex flex-col gap-5 lg:col-span-5">
+                <div>
+                  <p className="font-mono text-xs text-muted">
+                    <span className="text-accent">Featured</span> · {featured.company} · {featured.year}
+                  </p>
+                  <h3 className="mt-1.5 text-xl font-semibold tracking-[-0.01em]">
+                    <Link
+                      href={`/work/${featured.slug}`}
+                      className="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none"
+                    >
+                      {featured.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-2 text-sm text-muted">{featured.problem}</p>
+                </div>
+                <ul className="space-y-1.5 text-sm">
+                  {featured.built.map((b) => (
+                    <li key={b} className="flex gap-2">
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-line pt-4">
+                  <div className="mr-auto">
+                    <span className="font-mono text-2xl font-semibold text-accent">{featured.result.metric}</span>
+                    <span className="ml-2 text-xs text-muted">{featured.result.label}</span>
+                  </div>
+                  {featured.demoUrl && (
+                    <a
+                      href={featured.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="relative z-10 inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
+                    >
+                      <Play size={14} aria-hidden /> Watch demo
+                    </a>
+                  )}
+                </div>
+                <Chips items={featured.stack.slice(0, 8)} />
+              </div>
+              <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line bg-white lg:col-span-7 lg:self-center">
+                <Image
+                  src={featured.image!}
+                  alt={featured.gallery?.[0]?.alt ?? featured.title}
+                  fill
+                  sizes="(min-width: 1024px) 680px, 100vw"
+                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+            </article>
+          </Lift>
+        </Reveal>
         {bento.map((s, i) => (
           <Reveal
             key={s.slug}

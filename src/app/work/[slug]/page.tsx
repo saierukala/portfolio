@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import { ArrowLeft, Github, Play } from "lucide-react";
 import { caseStudies } from "@/data/profile";
 import Chips from "@/components/Chips";
 
@@ -39,6 +40,45 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
       </p>
       <h1 className="mt-2 text-4xl font-semibold leading-tight tracking-[-0.03em] sm:text-5xl">{s.title}</h1>
 
+      {(s.demoUrl || s.repoUrl) && (
+        <div className="mt-6 flex flex-wrap gap-3">
+          {s.demoUrl && (
+            <a
+              href={s.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 items-center gap-2 rounded-lg bg-accent px-5 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
+            >
+              <Play size={16} aria-hidden /> Watch the full demo
+            </a>
+          )}
+          {s.repoUrl && (
+            <a
+              href={s.repoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-11 items-center gap-2 rounded-lg border border-line px-5 text-sm font-medium transition-colors hover:border-accent"
+            >
+              <Github size={16} aria-hidden /> Source on GitHub
+            </a>
+          )}
+        </div>
+      )}
+
+      {s.gallery?.[0] && !s.gallery[0].phone && (
+        <figure className="mt-10 overflow-hidden rounded-card border border-line bg-white">
+          <Image
+            src={s.gallery[0].src}
+            alt={s.gallery[0].alt}
+            width={1280}
+            height={800}
+            priority
+            sizes="(min-width: 768px) 720px, 100vw"
+            className="h-auto w-full"
+          />
+        </figure>
+      )}
+
       <section className="mt-12 space-y-3">
         <H>Problem</H>
         <p className="text-lg">{s.problem}</p>
@@ -63,6 +103,62 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
           <span className="ml-3 text-muted">{s.result.label}</span>
         </p>
       </section>
+
+      {s.videos && s.videos.length > 0 && (
+        <section className="mt-10 space-y-4">
+          <H>Watch it work</H>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {s.videos.map((v) => (
+              <figure key={v.src} className="space-y-2">
+                <video
+                  src={v.src}
+                  poster={v.poster}
+                  controls
+                  muted
+                  playsInline
+                  preload="none"
+                  className="aspect-video w-full rounded-xl border border-line bg-surface"
+                  aria-label={v.title}
+                />
+                <figcaption>
+                  <p className="text-sm font-medium">{v.title}</p>
+                  <p className="text-xs text-muted">{v.caption}</p>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {s.gallery && s.gallery.length > 0 && (
+        <section className="mt-10 space-y-4">
+          <H>Screenshots</H>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {s.gallery.map((g) => (
+              <figure key={g.src} className="space-y-2">
+                <a
+                  href={g.src}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`block overflow-hidden rounded-xl border border-line bg-white transition-colors hover:border-accent ${
+                    g.phone ? "relative aspect-[16/10] w-full !bg-surface" : ""
+                  }`}
+                >
+                  <Image
+                    src={g.src}
+                    alt={g.alt}
+                    width={g.phone ? 390 : 1280}
+                    height={g.phone ? 844 : 800}
+                    sizes="(min-width: 768px) 360px, 100vw"
+                    className={g.phone ? "h-full w-full object-contain py-3" : "h-auto w-full"}
+                  />
+                </a>
+                <figcaption className="text-xs text-muted">{g.caption}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mt-10 space-y-3">
         <H>Stack</H>

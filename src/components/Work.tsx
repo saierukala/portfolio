@@ -1,125 +1,75 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Play } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { caseStudies } from "@/data/profile";
 import Section from "./Section";
 import Reveal from "./Reveal";
 import Lift from "./Lift";
-import Chips from "./Chips";
 
-// Row 1: large + medium, row 2: medium + large, so the 12-col grid has no gaps.
-const order = ["hrms", "sri-lakshmi-kalamkari", "swechaa-news-portal", "tg-agros-erp"];
-const bento = order.map((slug) => caseStudies.find((c) => c.slug === slug)!);
-const featuredList = ["businesshub", "homefix-mobile"].map((slug) => caseStudies.find((c) => c.slug === slug)!);
+// Display order: the two recent full-stack + mobile builds first, then the company projects.
+const order = ["businesshub", "homefix-mobile", "hrms", "tg-agros-erp", "sri-lakshmi-kalamkari", "swechaa-news-portal"];
+const studies = order.map((slug) => caseStudies.find((c) => c.slug === slug)!);
 
 export default function Work() {
   return (
     <Section id="work" eyebrow="Selected work" title="Six products, built end to end.">
-      <div className="grid gap-4 lg:grid-cols-12">
-        {featuredList.map((featured, fi) => (
-          <Reveal key={featured.slug} className="lg:col-span-12">
-            <Lift className="h-full">
-              <article className="group relative grid gap-6 rounded-card border border-line bg-surface p-5 transition-colors focus-within:border-accent hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10 sm:p-6 lg:grid-cols-12">
-                <div className={`flex flex-col gap-5 lg:col-span-5 ${fi % 2 ? "lg:order-last" : ""}`}>
-                  <div>
-                    <p className="font-mono text-xs text-muted">
-                      <span className="text-accent">Featured</span> · {featured.company} · {featured.year}
-                    </p>
-                    <h3 className="mt-1.5 text-xl font-semibold tracking-[-0.01em]">
-                      <Link
-                        href={`/work/${featured.slug}`}
-                        className="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none"
-                      >
-                        {featured.title}
-                      </Link>
-                    </h3>
-                    <p className="mt-2 text-sm text-muted">{featured.problem}</p>
+      <ul className="grid gap-6 md:grid-cols-2">
+        {studies.map((s, i) => (
+          <li key={s.slug}>
+            <Reveal delay={(i % 2) * 0.06} className="h-full">
+              <Lift className="h-full">
+                <article className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface transition-colors focus-within:border-accent hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-line bg-white">
+                    {s.image && (
+                      <Image
+                        src={s.image}
+                        alt={s.gallery?.[0]?.alt ?? s.title}
+                        fill
+                        sizes="(min-width: 768px) 560px, 100vw"
+                        className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                    )}
                   </div>
-                  <ul className="space-y-1.5 text-sm">
-                    {featured.built.map((b) => (
-                      <li key={b} className="flex gap-2">
-                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
-                        {b}
-                      </li>
-                  ))}
-                </ul>
-                <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-line pt-4">
-                  <div className="mr-auto">
-                    <span className="font-mono text-2xl font-semibold text-accent">{featured.result.metric}</span>
-                    <span className="ml-2 text-xs text-muted">{featured.result.label}</span>
+                  <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
+                    <div>
+                      <p className="font-mono text-xs text-muted">
+                        {s.company} · {s.year}
+                      </p>
+                      <h3 className="mt-1.5 text-lg font-semibold tracking-[-0.01em] sm:text-xl">
+                        <Link
+                          href={`/work/${s.slug}`}
+                          className="after:absolute after:inset-0 after:z-10 focus-visible:outline-none"
+                        >
+                          {s.title}
+                        </Link>
+                      </h3>
+                      <p className="mt-2 line-clamp-2 text-sm text-muted">{s.problem}</p>
+                    </div>
+                    <div className="mt-auto flex items-end justify-between gap-4 border-t border-line pt-4">
+                      <div className="min-w-0">
+                        <span className="font-mono text-2xl font-semibold text-accent">{s.result.metric}</span>
+                        <span className="ml-2 text-xs text-muted">{s.result.label}</span>
+                      </div>
+                      <ArrowUpRight
+                        size={20}
+                        className="shrink-0 text-muted transition-colors group-hover:text-accent"
+                        aria-hidden
+                      />
+                    </div>
+                    <ul className="flex flex-wrap gap-1.5" aria-label="Stack">
+                      {s.stack.slice(0, 5).map((t) => (
+                        <li key={t} className="rounded-md border border-line px-2 py-1 font-mono text-[11px] text-muted">
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  {featured.demoUrl && (
-                    <a
-                      href={featured.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="relative z-10 inline-flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
-                    >
-                      <Play size={14} aria-hidden /> Watch demo
-                    </a>
-                  )}
-                </div>
-                <Chips items={featured.stack.slice(0, 8)} />
-              </div>
-              <div
-                className="relative overflow-hidden rounded-xl border border-line bg-white lg:col-span-7 lg:self-center"
-                style={{ aspectRatio: featured.imageRatio ?? "16 / 10" }}
-              >
-                <Image
-                  src={featured.image!}
-                  alt={featured.gallery?.[0]?.alt ?? featured.title}
-                  fill
-                  sizes="(min-width: 1024px) 680px, 100vw"
-                  className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
-            </article>
-          </Lift>
-        </Reveal>
+                </article>
+              </Lift>
+            </Reveal>
+          </li>
         ))}
-        {bento.map((s, i) => (
-          <Reveal
-            key={s.slug}
-            delay={(i % 2) * 0.06}
-            className={s.size === "large" ? "lg:col-span-7" : "lg:col-span-5"}
-          >
-            <Lift className="h-full">
-              <article className="group relative flex h-full flex-col gap-5 rounded-card border border-line bg-surface p-5 transition-colors focus-within:border-accent hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10 sm:p-6">
-                <div>
-                  <p className="font-mono text-xs text-muted">
-                    {s.company} · {s.year}
-                  </p>
-                  <h3 className="mt-1.5 text-xl font-semibold tracking-[-0.01em]">
-                    <Link
-                      href={`/work/${s.slug}`}
-                      className="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none"
-                    >
-                      {s.title}
-                    </Link>
-                  </h3>
-                  <p className="mt-2 text-sm text-muted">{s.problem}</p>
-                </div>
-                <ul className="space-y-1.5 text-sm">
-                  {s.built.map((b) => (
-                    <li key={b} className="flex gap-2">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto flex items-end justify-between gap-4 border-t border-line pt-4">
-                  <div>
-                    <span className="font-mono text-2xl font-semibold text-accent">{s.result.metric}</span>
-                    <span className="ml-2 text-xs text-muted">{s.result.label}</span>
-                  </div>
-                  <ArrowUpRight size={18} className="text-muted" aria-hidden />
-                </div>
-                <Chips items={s.stack} />
-              </article>
-            </Lift>
-          </Reveal>
-        ))}
-      </div>
+      </ul>
     </Section>
   );
 }

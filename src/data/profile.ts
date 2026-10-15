@@ -175,6 +175,8 @@ export const caseStudies: CaseStudy[] = [
     year: "2024–2026",
     size: "large",
     mock: "hrms",
+    image: "/work/hrms.webp",
+    gallery: [{ src: "/work/hrms.webp", alt: "HRMS attendance dashboard: present, late and on-leave counts, attendance table, leave approvals and the HR Assistant chat", caption: "Attendance, leave approvals and HR Assistant (illustrative, dummy data)" }],
     problem: "300+ employees needed one system for records, attendance, leave approvals and HR questions.",
     built: [
       "React + Tailwind front end for Employee, Attendance, Leave, Team, Projects and Help Desk modules",
@@ -196,6 +198,8 @@ export const caseStudies: CaseStudy[] = [
     year: "2024–2026",
     size: "large",
     mock: "erp",
+    image: "/work/erp.webp",
+    gallery: [{ src: "/work/erp.webp", alt: "TG Agros ERP inventory screen: SKU table with stock bars and low-stock status, server-side pagination and AI reorder recommendations", caption: "Inventory with AI reorder recommendations (illustrative, dummy data)" }],
     problem: "Sales, purchasing and inventory tables had to stay fast on large datasets.",
     built: [
       "Sales, Purchasing and Inventory modules in React + Redux Toolkit on a shared Material UI component library",
@@ -214,6 +218,8 @@ export const caseStudies: CaseStudy[] = [
     year: "2023–2024",
     size: "medium",
     mock: "store",
+    image: "/work/store.webp",
+    gallery: [{ src: "/work/store.webp", alt: "Sri Lakshmi Kalamkari storefront: product grid and a checkout summary with the order total", caption: "Catalog and checkout (illustrative, dummy data)" }],
     problem: "A storefront that stays fast and easy to check out on mobile.",
     built: [
       "Next.js SSR storefront with catalog, cart and checkout",
@@ -232,6 +238,8 @@ export const caseStudies: CaseStudy[] = [
     year: "2024–2026",
     size: "medium",
     mock: "news",
+    image: "/work/news.webp",
+    gallery: [{ src: "/work/news.webp", alt: "Swechaa news CMS: article list with Draft, Scheduled and Published status, e-paper edition preview and media upload", caption: "Article dashboard and e-paper editions (illustrative, dummy data)" }],
     problem: "Editors needed one dashboard to run articles, e-paper editions and short news.",
     built: [
       "Content dashboard for articles, e-paper editions and category short news",

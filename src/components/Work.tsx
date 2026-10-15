@@ -19,8 +19,8 @@ export default function Work() {
             <Reveal delay={(i % 2) * 0.06} className="h-full">
               <Lift className="h-full">
                 <article className="group relative flex h-full flex-col overflow-hidden rounded-card border border-line bg-surface transition-colors focus-within:border-accent hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-line bg-white">
-                    {s.image && (
+                  {s.image && (
+                    <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-line bg-white">
                       <Image
                         src={s.image}
                         alt={s.gallery?.[0]?.alt ?? s.title}
@@ -28,8 +28,8 @@ export default function Work() {
                         sizes="(min-width: 768px) 560px, 100vw"
                         className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
                       />
-                    )}
-                  </div>
+                    </div>
+                  )}
                   <div className="flex flex-1 flex-col gap-4 p-5 sm:p-6">
                     <div>
                       <p className="font-mono text-xs text-muted">
@@ -43,8 +43,18 @@ export default function Work() {
                           {s.title}
                         </Link>
                       </h3>
-                      <p className="mt-2 line-clamp-2 text-sm text-muted">{s.problem}</p>
+                      <p className={`mt-2 text-sm text-muted ${s.image ? "line-clamp-2" : ""}`}>{s.problem}</p>
                     </div>
+                    {!s.image && (
+                      <ul className="space-y-2 text-sm">
+                        {s.built.map((b) => (
+                          <li key={b} className="flex gap-3">
+                            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" aria-hidden />
+                            {b}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                     <div className="mt-auto flex items-end justify-between gap-4 border-t border-line pt-4">
                       <div className="min-w-0">
                         <span className="font-mono text-2xl font-semibold text-accent">{s.result.metric}</span>

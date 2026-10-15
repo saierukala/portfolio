@@ -29,6 +29,8 @@ const H = ({ children }: { children: React.ReactNode }) => (
 export default function CaseStudyPage({ params }: { params: { slug: string } }) {
   const s = caseStudies.find((c) => c.slug === params.slug);
   if (!s) notFound();
+  // Mobile-app case studies: show phone screenshots in their own tall grid.
+  const phoneGrid = (s.gallery?.filter((g) => g.phone).length ?? 0) >= 3;
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:py-20">
@@ -134,7 +136,7 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
         <section className="mt-10 space-y-4">
           <H>Screenshots</H>
           <div className="grid gap-6 sm:grid-cols-2">
-            {s.gallery.map((g) => (
+            {(phoneGrid ? s.gallery.filter((g) => !g.phone) : s.gallery).map((g) => (
               <figure key={g.src} className="space-y-2">
                 <a
                   href={g.src}
@@ -157,6 +159,32 @@ export default function CaseStudyPage({ params }: { params: { slug: string } }) 
               </figure>
             ))}
           </div>
+          {phoneGrid && (
+            <div className="grid grid-cols-2 gap-4 pt-2 sm:grid-cols-4">
+              {s.gallery
+                .filter((g) => g.phone)
+                .map((g) => (
+                  <figure key={g.src} className="space-y-2">
+                    <a
+                      href={g.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block overflow-hidden rounded-xl border border-line bg-surface transition-colors hover:border-accent"
+                    >
+                      <Image
+                        src={g.src}
+                        alt={g.alt}
+                        width={360}
+                        height={779}
+                        sizes="(min-width: 640px) 170px, 50vw"
+                        className="h-auto w-full"
+                      />
+                    </a>
+                    <figcaption className="text-xs text-muted">{g.caption}</figcaption>
+                  </figure>
+                ))}
+            </div>
+          )}
         </section>
       )}
 

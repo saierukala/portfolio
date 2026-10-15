@@ -10,36 +10,37 @@ import Chips from "./Chips";
 // Row 1: large + medium, row 2: medium + large, so the 12-col grid has no gaps.
 const order = ["hrms", "sri-lakshmi-kalamkari", "swechaa-news-portal", "tg-agros-erp"];
 const bento = order.map((slug) => caseStudies.find((c) => c.slug === slug)!);
-const featured = caseStudies.find((c) => c.slug === "businesshub")!;
+const featuredList = ["businesshub", "homefix-mobile"].map((slug) => caseStudies.find((c) => c.slug === slug)!);
 
 export default function Work() {
   return (
-    <Section id="work" eyebrow="Selected work" title="Five products, built end to end.">
+    <Section id="work" eyebrow="Selected work" title="Six products, built end to end.">
       <div className="grid gap-4 lg:grid-cols-12">
-        <Reveal className="lg:col-span-12">
-          <Lift className="h-full">
-            <article className="group relative grid gap-6 rounded-card border border-line bg-surface p-5 transition-colors focus-within:border-accent hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10 sm:p-6 lg:grid-cols-12">
-              <div className="flex flex-col gap-5 lg:col-span-5">
-                <div>
-                  <p className="font-mono text-xs text-muted">
-                    <span className="text-accent">Featured</span> · {featured.company} · {featured.year}
-                  </p>
-                  <h3 className="mt-1.5 text-xl font-semibold tracking-[-0.01em]">
-                    <Link
-                      href={`/work/${featured.slug}`}
-                      className="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none"
-                    >
-                      {featured.title}
-                    </Link>
-                  </h3>
-                  <p className="mt-2 text-sm text-muted">{featured.problem}</p>
-                </div>
-                <ul className="space-y-1.5 text-sm">
-                  {featured.built.map((b) => (
-                    <li key={b} className="flex gap-2">
-                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
-                      {b}
-                    </li>
+        {featuredList.map((featured, fi) => (
+          <Reveal key={featured.slug} className="lg:col-span-12">
+            <Lift className="h-full">
+              <article className="group relative grid gap-6 rounded-card border border-line bg-surface p-5 transition-colors focus-within:border-accent hover:border-accent/60 hover:shadow-xl hover:shadow-accent/10 sm:p-6 lg:grid-cols-12">
+                <div className={`flex flex-col gap-5 lg:col-span-5 ${fi % 2 ? "lg:order-last" : ""}`}>
+                  <div>
+                    <p className="font-mono text-xs text-muted">
+                      <span className="text-accent">Featured</span> · {featured.company} · {featured.year}
+                    </p>
+                    <h3 className="mt-1.5 text-xl font-semibold tracking-[-0.01em]">
+                      <Link
+                        href={`/work/${featured.slug}`}
+                        className="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none"
+                      >
+                        {featured.title}
+                      </Link>
+                    </h3>
+                    <p className="mt-2 text-sm text-muted">{featured.problem}</p>
+                  </div>
+                  <ul className="space-y-1.5 text-sm">
+                    {featured.built.map((b) => (
+                      <li key={b} className="flex gap-2">
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-muted" aria-hidden />
+                        {b}
+                      </li>
                   ))}
                 </ul>
                 <div className="mt-auto flex flex-wrap items-center gap-3 border-t border-line pt-4">
@@ -60,7 +61,10 @@ export default function Work() {
                 </div>
                 <Chips items={featured.stack.slice(0, 8)} />
               </div>
-              <div className="relative aspect-[16/10] overflow-hidden rounded-xl border border-line bg-white lg:col-span-7 lg:self-center">
+              <div
+                className="relative overflow-hidden rounded-xl border border-line bg-white lg:col-span-7 lg:self-center"
+                style={{ aspectRatio: featured.imageRatio ?? "16 / 10" }}
+              >
                 <Image
                   src={featured.image!}
                   alt={featured.gallery?.[0]?.alt ?? featured.title}
@@ -72,6 +76,7 @@ export default function Work() {
             </article>
           </Lift>
         </Reveal>
+        ))}
         {bento.map((s, i) => (
           <Reveal
             key={s.slug}

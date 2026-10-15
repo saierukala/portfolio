@@ -22,6 +22,8 @@ export type CaseStudy = {
   stack: string[];
   /** Swap in a real screenshot later: put the file in /public and set e.g. "/work/hrms.png". */
   image?: string;
+  /** CSS aspect-ratio of the featured card image; defaults to 16 / 10. */
+  imageRatio?: string;
   mock?: "hrms" | "erp" | "store" | "news";
   /** Real screenshots shown on the case-study page (files in /public). */
   gallery?: { src: string; alt: string; caption: string; phone?: boolean }[];
@@ -70,6 +72,7 @@ export const metrics: Metric[] = [
 ];
 
 const bh = "/work/businesshub";
+const hf = "/work/homefix-mobile";
 
 export const caseStudies: CaseStudy[] = [
   {
@@ -112,6 +115,56 @@ export const caseStudies: CaseStudy[] = [
       { src: `${bh}/03-technician-on-the-job.webm`, poster: `${bh}/03-technician-on-the-job-poster.png`, title: "Technician on the job", caption: "On my way, arrived, start: one-hand buttons on a phone." },
       { src: `${bh}/11-double-booking-refused.webm`, poster: `${bh}/11-double-booking-refused-poster.png`, title: "Double booking refused", caption: "Two bookings for the same technician and time: the second gets a 409." },
       { src: `${bh}/08-owner-dashboard-reports-audit.webm`, poster: `${bh}/08-owner-dashboard-reports-audit-poster.png`, title: "Owner: dashboard, reports, audit", caption: "The owner reviews the day, revenue and every change in the audit log." },
+    ],
+  },
+  {
+    slug: "homefix-mobile",
+    title: "HomeFix — React Native App for Field Service",
+    short: "HomeFix Mobile",
+    company: "Personal project",
+    year: "2026",
+    size: "large",
+    problem:
+      "Customers, technicians, managers and the owner of an appliance repair business needed one phone app to book, run and pay for repairs, on the same API as the BusinessHub web app.",
+    built: [
+      "React Native 0.86 + Expo SDK 57 app with Expo Router and TypeScript: one app, four roles (customer, technician, manager, owner)",
+      "Customers book in 5 steps, follow the visit on a live step tracker, approve extra charges and pay with Razorpay's native checkout",
+      "Technicians run the day with one-tap visit steps, call or open Maps, add notes, request extra work and collect cash or UPI",
+    ],
+    extra: [
+      "Managers assign technicians, book for phone-in customers (including phone-only customers with no email) and see reports; the owner also manages services, users and the audit log",
+      "JWT kept in the phone's secure keystore (expo-secure-store) and sent as a Bearer token; a 401 logs out and clears all cached data",
+      "The server decides: free slots, prices, totals and permissions come from the API; a PostgreSQL exclusion constraint refuses double bookings and the app asks the user to pick again",
+      "6-digit one-time codes finish reset-password, invite and email-verification flows inside the app, without a web link",
+      "React Native Paper (Material 3) with light / dark mode and 8 app colours, TanStack Query, React Hook Form + Zod",
+      "Vitest unit tests and Playwright end-to-end tests on phone-sized screens (Pixel 7, iPhone 14); EAS Build for the Android APK",
+    ],
+    result: { metric: "4", label: "roles in one app, on one shared API" },
+    stack: ["React Native", "Expo", "Expo Router", "TypeScript", "React Native Paper", "TanStack Query", "React Hook Form", "Zod", "Razorpay", "Playwright", "EAS Build"],
+    image: `${hf}/banner.jpg`,
+    imageRatio: "1600 / 820",
+    demoUrl: "https://drive.google.com/file/d/157z9WD6HO0IEs9F54uRjFi96dneqXbnd/view?usp=drive_link",
+    repoUrl: "https://github.com/saierukala/businesshub-reactnative",
+    gallery: [
+      { src: `${hf}/banner.jpg`, alt: "HomeFix app screens: customer home, booking with live tracker, technician job and manager dashboard", caption: "Customer, technician and manager screens" },
+      { src: `${hf}/app-colours.png`, alt: "The app in eight colour palettes, light and dark", caption: "Eight app colours, light and dark" },
+      { src: `${hf}/login.png`, alt: "Log in screen", caption: "Log in", phone: true },
+      { src: `${hf}/customer-home.png`, alt: "Customer home with upcoming visit and appliances", caption: "Customer home", phone: true },
+      { src: `${hf}/book-step-4.png`, alt: "Booking step 4: picking a free time slot", caption: "Book: pick a time", phone: true },
+      { src: `${hf}/booking-detail.png`, alt: "Booking detail with a live visit tracker", caption: "Booking with live tracker", phone: true },
+      { src: `${hf}/technician-job.png`, alt: "Technician's job screen with call, map and visit steps", caption: "Technician's job", phone: true },
+      { src: `${hf}/staff-dashboard.png`, alt: "Manager dashboard with revenue, bookings today and last 7 days", caption: "Manager dashboard", phone: true },
+      { src: `${hf}/reports.png`, alt: "Reports screen", caption: "Reports", phone: true },
+      { src: `${hf}/settings.png`, alt: "Settings with light / dark mode and app colour", caption: "Settings", phone: true },
+      { src: `${hf}/customer-home-dark.png`, alt: "Customer home in dark mode", caption: "Customer home, dark", phone: true },
+      { src: `${hf}/technician-job-dark.png`, alt: "Technician's job in dark mode", caption: "Technician's job, dark", phone: true },
+      { src: `${hf}/profile.png`, alt: "Profile with photo", caption: "Profile", phone: true },
+    ],
+    videos: [
+      { src: `${hf}/01-customer-books-a-repair.webm`, poster: `${hf}/01-customer-books-a-repair-poster.jpg`, title: "Customer books a repair", caption: "Log in, 5 booking steps, booking confirmed." },
+      { src: `${hf}/03-technician-on-the-job.webm`, poster: `${hf}/03-technician-on-the-job-poster.jpg`, title: "Technician on the job", caption: "On my way, arrived, start work, then ask for an extra charge." },
+      { src: `${hf}/06-manager-books-for-a-caller.webm`, poster: `${hf}/06-manager-books-for-a-caller-poster.jpg`, title: "Manager books for a caller", caption: "Booking for a phone-only customer who called in." },
+      { src: `${hf}/09-settings-dark-mode.webm`, poster: `${hf}/09-settings-dark-mode-poster.jpg`, title: "Settings and dark mode", caption: "Switch to dark mode; the choice is saved on the device." },
     ],
   },
   {
@@ -259,11 +312,12 @@ export const coreSkills = ["React", "Next.js", "Node.js", "PostgreSQL", "TypeScr
 export const skills: { group: string; items: string[] }[] = [
   {
     group: "Front-End",
-    items: ["React", "Next.js SSR", "TypeScript", "JavaScript ES6+", "Redux Toolkit", "Context API", "React Router", "Tailwind", "Material UI", "Vue.js", "Nuxt.js"],
+    items: ["React", "Next.js (App Router, SSR)", "TypeScript", "JavaScript ES6+", "Redux Toolkit", "TanStack Query", "React Hook Form", "Context API", "React Router", "Tailwind", "Material UI", "Vue.js", "Nuxt.js"],
   },
-  { group: "Back-End & AI", items: ["Node.js", "Express.js", "REST APIs", "RBAC", "OpenAI API"] },
+  { group: "Mobile", items: ["React Native (Expo)", "Expo Router", "React Native Paper"] },
+  { group: "Back-End & AI", items: ["Node.js", "Express.js", "REST APIs", "Prisma", "Zod", "JWT Auth", "RBAC", "Razorpay", "Swagger/OpenAPI", "OpenAI API"] },
   { group: "Databases", items: ["PostgreSQL", "MySQL", "MongoDB"] },
-  { group: "Testing & Tools", items: ["Jest", "React Testing Library", "Git/GitHub", "CI/CD", "Vercel", "Agile"] },
+  { group: "Testing & DevOps", items: ["Jest", "Vitest", "React Testing Library", "Supertest", "Playwright", "Git/GitHub", "GitHub Actions CI/CD", "Vercel", "Agile"] },
   { group: "AI Dev Tools", items: ["Claude Code", "Cursor", "Codex"] },
 ];
 
